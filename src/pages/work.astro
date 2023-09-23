@@ -1,0 +1,68 @@
+---
+import { getCollection } from 'astro:content';
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+import ContactCTA from '../components/ContactCTA.astro';
+import PortfolioPreview from '../components/PortfolioPreview.astro';
+import Hero from '../components/Hero.astro';
+import Grid from '../components/Grid.astro';
+
+const projects = (await getCollection('work')).sort(
+	(a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
+);
+---
+
+<BaseLayout
+	title="Mes Projets | Elvis OHIN"
+	description="Découvrez les projets les plus récents d'Elvis OHIN"
+>
+	<div class="stack gap-20">
+		<main class="wrapper stack gap-8">
+			<Hero
+				title="Mes Projets"
+				tagline="Voyez mes projets les plus récents ci-dessous pour vous faire une idée de mon expérience passée."
+				align="start"
+			/>
+			<Grid variant="offset">
+				{
+					projects.map((project) => (
+						<li>
+							<PortfolioPreview project={project} />
+						</li>
+					))
+				}
+			</Grid>
+		</main>
+		<ContactCTA />
+	</div>
+    <canvas id="waves"></canvas>
+</BaseLayout>
+<script>
+    import "../js/wave.js";
+  </script>
+  <style lang="scss">
+    $waves-opacity: 0.5;
+
+    @keyframes fadeInWaves {
+      0% { opacity: 0 }
+      100% { opacity: $waves-opacity }
+    }
+
+    canvas#waves {
+      width: 100%;
+      height: 100vh;
+      animation: fadeInWaves 2s;
+      z-index: -1;
+      background: transparent;
+      opacity: $waves-opacity;
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+
+  </style>
