@@ -7,10 +7,12 @@ import ContactCTA from '../../components/ContactCTA.astro';
 import Hero from '../../components/Hero.astro';
 import Icon from '../../components/Icon.astro';
 import Pill from '../../components/Pill.astro';
+import { devIcons } from '../../components/DevLogo.astro';
 
 interface Props {
 	entry: CollectionEntry<'work'>;
 }
+export const prerender = true;
 
 // This is a dynamic route that generates a page for every Markdown file in src/content/
 // Read more about dynamic routes and this `getStaticPaths` function in the Astro docs:
@@ -32,7 +34,7 @@ const { Content } = await entry.render();
 		<div class="stack gap-15">
 			<header>
 				<div class="wrapper stack gap-2">
-					<a class="back-link" href="/work/"><Icon icon="arrow-left" /> Work</a>
+					<a class="back-link" href="/work/"><Icon icon="arrow-left" /> Projets</a>
 					<Hero title={entry.data.title} align="start">
 						<div class="details">
 							<div class="tags">
@@ -149,3 +151,6 @@ const { Content } = await entry.render();
 		}
 	}
 </style>
+
+
+
